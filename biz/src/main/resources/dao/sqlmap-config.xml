@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "classpath:com/ibatis/sqlmap/engine/builder/xml/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings cacheModelsEnabled="true" errorTracingEnabled="true"
+              lazyLoadingEnabled="false" enhancementEnabled="true"
+              useStatementNamespaces="true"/>
+ 	<sqlMap resource="dao/demo.xml" />
+</sqlMapConfig>

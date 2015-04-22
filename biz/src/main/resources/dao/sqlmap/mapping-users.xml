@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "classpath:com/ibatis/sqlmap/engine/builder/xml/sql-map-2.dtd" >
+<sqlMap namespace="userDO">
+	
+    <typeAlias alias="userDO" type="com.wuman.biz.pojo.UserDO"/>
+    
+    <sql id="allColumns">
+	     cid,
+	     nodeid nodeId ,
+	     nick,
+		 useractive userActive,
+		 birthday birthDay,
+		 sex,
+		 phone,
+		 pic,
+		 user_tag userTag,
+		 password passWord,
+		 dataOwner,
+		 email,
+		 address,
+		 opertime operTime,
+		 fullname fullName,
+		 ref_user_id refUserId,
+		 addtime addTime,
+		 alias
+    </sql>
+    
+	<update id="users.updateUserDO" parameterClass="userDO" >
+		update wm_users
+		set 
+			opertime=#operTime#
+			<dynamic>
+				<isNotNull property="phone" prepend=" , ">
+					phone=#phone#
+				</isNotNull>
+				<isNotNull property="fullName" prepend=" , ">
+					fullname=#fullName#
+				</isNotNull>
+			</dynamic>
+		where 	cid=#cid#
+	</update>
+	
+	<select id="users.getSingleUser" resultClass="userDO" >
+        select <include refid="allColumns" />
+        from wm_users 
+        where 1=1
+        <dynamic>
+			<isNotNull property="phone" prepend=" and ">
+				phone=#phone#
+			</isNotNull>
+			<isNotNull property="nick" prepend=" and ">
+				nick=#nick#
+			</isNotNull>
+		</dynamic>
+		limit 1
+    </select>
+	
+	<select id="users.getUsersByUserActive" resultClass="userDO">
+        select <include refid="allColumns" />
+        from wm_users 
+        where
+        useractive=#userActive#
+    </select>
+    
+</sqlMap>
